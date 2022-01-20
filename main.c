@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
+/*   Updated: 2022/01/19 19:03:41 by marcrodr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include <mlx.h>
-
-
-
+#include <stdio.h>
 
 typedef struct	s_data {
 	void	*img;
@@ -11,7 +22,17 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
+
+int	close(int keycode, t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	return (0);
+}
+
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -21,6 +42,27 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int key_hook(int keycode, t_vars *vars)
+{
+	printf("Hello from key_hook!\n");
+	return (0);
+}
+
+int mouse_hook(int keycode, t_vars *vars)
+{
+	if (keycode == 1)
+		printf("Hello from mouse_1!\n");
+	else
+		printf("Hello from mouse_hook!\n");
+	return (0);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+
 int	main(void)
 {
 	void	*mlx;
@@ -28,36 +70,36 @@ int	main(void)
 	t_data	img;
 	int		x;
 	int 	y;
-	int 	r;
+	int 	z;
+	t_vars	vars;
+
 
 	y = 500;
 	x = 300;
-	r = 200;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1024, 800, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	z = 200;
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
+	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+
+
+/*	img.img = mlx_new_image(mlx, 1920, 1080);
+
+	
+	//img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	while (x < 500)
 	{
-		my_mlx_pixel_put(&img, x, 500, 0x00FF0000);
-		my_mlx_pixel_put(&img, 300, y, 0x00FF0000);
-		my_mlx_pixel_put(&img, x, 700, 0x00FF0000);
-		my_mlx_pixel_put(&img, 500, y, 0x00FF0000);
+		
+		my_mlx_pixel_put(&img, x, y, create_trgb(0, 255, 255, 0)); 
+		my_mlx_pixel_put(&img, 300, y, create_trgb(0, 0, 255, 0));
+		my_mlx_pixel_put(&img, x, 700, create_trgb(0, 0, 0, 255));
+	//	my_mlx_pixel_put(&img, 500, y, 0xFF0000);
 
 		x++;
 		y++;
 	}
-
-		my_mlx_pixel_put(&img, 2, 3, 0x00FF0000);
-		my_mlx_pixel_put(&img, 3, 2, 0x00FF0000);
-		my_mlx_pixel_put(&img, 4, 2, 0x00FF0000);
-		my_mlx_pixel_put(&img, 5, 3, 0x00FF0000);
-		my_mlx_pixel_put(&img, 5, 4, 0x00FF0000);
-		my_mlx_pixel_put(&img, 4, 5, 0x00FF0000);
-		my_mlx_pixel_put(&img, 3, 5, 0x00FF0000);
-		my_mlx_pixel_put(&img, 2, 4, 0x00FF0000);
-
-
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	
+	
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);*/
+	mlx_loop(vars.mlx);
 }
