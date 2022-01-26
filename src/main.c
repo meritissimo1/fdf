@@ -6,12 +6,12 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/01/19 19:03:41 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/01/26 16:15:04 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include <mlx.h>
+#include "../minilibx_linux/mlx.h"
 #include <stdio.h>
 
 typedef struct	s_data {
