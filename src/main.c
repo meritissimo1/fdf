@@ -6,100 +6,61 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/01/26 16:15:04 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/14 09:57:52 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/fdf.h"
 
-#include "../minilibx_linux/mlx.h"
-#include <stdio.h>
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-int	close(int keycode, t_vars *vars)
+static int	close_window(t_fdf_params *fdf)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	exit_program(fdf, 0);
 	return (0);
 }
 
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+static void	new_window(t_fdf_params *fdf, char *name)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	fdf->win = mlx_new_window(fdf->mlx, WIN_SIZE_X, WIN_SIZE_Y, name);
+	mlx_hook(fdf->win, 17, 0, close_window, fdf);
 }
 
-int key_hook(int keycode, t_vars *vars)
+static void	init(t_fdf_params *fdf)
 {
-	printf("Hello from key_hook!\n");
-	return (0);
+	fdf->mlx = mlx_init();
+	new_window(fdf, "fdf - marcrodr");
+	fdf->angles = malloc(sizeof(t_angles));
+	if (!fdf->angles)
+		error(3, 0, "Error while allocating memory for angles.");
+	fdf->angles->alpha = 1.05;
+	fdf->angles->beta = 0.65;
+	fdf->angles->gama = 0.8;
+	fdf->zoom = 50;
+	fdf->translation_x = 300;
+	fdf->translation_y = 100;
+	fdf->z_multiplier = 1;
+	fdf->map.x_max = -1;
+	fdf->map.y_max = 0;
+	fdf->map.z_max = 0;
+	fdf->map.z_min = 0;
+	fdf->map.x = 0;
+	fdf->instructions = 0;
+	fdf->color_mode = 1;
+	fdf->color_one = create_trgb(255, 0, 255, 255);
+	fdf->color_two = create_trgb(255, 255, 255, 0);
+	ft_printf("\n\nPRESS H TO SHOW INSTRUCTIONS AND STATUS\n\n");
+	load_map(fdf);
 }
 
-int mouse_hook(int keycode, t_vars *vars)
+int	main(int argc, char **argv)
 {
-	if (keycode == 1)
-		printf("Hello from mouse_1!\n");
-	else
-		printf("Hello from mouse_hook!\n");
-	return (0);
-}
+	t_fdf_params	*fdf;
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-
-int	main(void)
-{
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	int		x;
-	int 	y;
-	int 	z;
-	t_vars	vars;
-
-
-	y = 500;
-	x = 300;
-	z = 200;
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 640, 480, "Hello world!");
-	mlx_key_hook(vars.win, key_hook, &vars);
-	mlx_mouse_hook(vars.win, mouse_hook, &vars);
-
-
-/*	img.img = mlx_new_image(mlx, 1920, 1080);
-
-	
-	//img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	while (x < 500)
-	{
-		
-		my_mlx_pixel_put(&img, x, y, create_trgb(0, 255, 255, 0)); 
-		my_mlx_pixel_put(&img, 300, y, create_trgb(0, 0, 255, 0));
-		my_mlx_pixel_put(&img, x, 700, create_trgb(0, 0, 0, 255));
-	//	my_mlx_pixel_put(&img, 500, y, 0xFF0000);
-
-		x++;
-		y++;
-	}
-	
-	
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);*/
-	mlx_loop(vars.mlx);
+	fdf = malloc(sizeof(t_fdf_params));
+	if (!fdf)
+		error(3, 0, "Error while creating fdf");
+	check_initial_errors(fdf, argc, argv);
+	init(fdf);
+	print_fdf(fdf);
+	mlx_key_hook(fdf->win, &key_hook, fdf);
+	mlx_loop(fdf->mlx);
 }

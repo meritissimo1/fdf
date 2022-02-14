@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 17:22:16 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/01/26 19:34:22 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/08 22:22:50 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_UP 65362
 # define KEY_ARROW_RIGHT 65363
-# define KEY_AROOW_DOWN 65364
+# define KEY_ARROW_DOWN 65364
 # define KEY_A 97
 # define KEY_W 119
 # define KEY_D 100
@@ -30,5 +30,9 @@
 # define KEY_M 109
 # define KEY_PLUS 65451
 # define KEY_MINUS 65453
+# define KEY_J 106
+# define KEY_K 107
+# define KEY_C 99
+# define KEY_H 104
 
 #endif

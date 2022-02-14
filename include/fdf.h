@@ -6,53 +6,110 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:21:31 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/01/26 19:59:12 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/14 07:41:19 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define WINDOW_SIZE_X 1080
-# define WINDOW_SIZE_Y 1920
-
-
-/*------LIBRARIES------*/
-
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
+# include <mlx.h>
 # include <math.h>
-# include "../minilibx_linux/mlx.h"
+# include <fcntl.h>
+# include <error.h>
 
+# include "keys.h"
+# include "../libft/libft.h"
 
-/*------STRUCT------*/
+# define	WIN_SIZE_X 1280
+# define	WIN_SIZE_Y 1024
+# define	PI 3.14159265359
 
-typedef struct s_point
-{
-	float	x;
-	float	y;
-	float	z;
-}	t_point;
+typedef enum e_status {
+	LOADING,
+	RUNNING,
+	ERROR,
+	EXITTING
+}			t_status;
 
-typedef struct s_map
-{
-	t_point **coordinates;
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		min_z;
-}	t_map;
+typedef enum e_color_mode {
+	SOLID = 0,
+	GRADIENT = 1,
+	RAINBOW = 2,
+}			t_color_mode;
 
-typedef struct s_angles
-{
+typedef struct s_angles {
 	float	alpha;
 	float	beta;
 	float	gama;
-}	t_angles;
+}				t_angles;
 
+typedef struct s_point {
+	float		x;
+	float		y;
+	int			z;
+	int			color;
+}				t_point;
 
+typedef struct s_map {
+	char	*map_name;
+	char	*path;
+	int		**points;
+	int		**colors;
+	int		x_max;
+	int		y_max;
+	int		z_max;
+	int		z_min;
+	int		x;
+}				t_map;
 
+typedef struct s_img {
+	void	*ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
+typedef struct s_fdf_params {
+	void			*mlx;
+	void			*win;
+	t_img			img;
+	t_map			map;
+	t_angles		*angles;
+	float			zoom;
+	int				translation_x;
+	int				translation_y;
+	float			z_multiplier;
+	t_status		status;
+	t_color_mode	color_mode;
+	int				color_one;
+	int				color_two;
+	float			x_step;
+	float			y_step;
+	int				instructions;
+}				t_fdf_params;
+
+int				create_trgb(int t, int r, int g, int b);
+int				get_t(int trgb);
+int				get_r(int trgb);
+int				get_g(int trgb);
+int				get_b(int trgb);
+int				get_color(t_fdf_params *fdf, int z);
+
+t_fdf_params	*check_initial_errors(t_fdf_params *fdf, int argc, char **argv);
+
+void			load_map(t_fdf_params *fdf);
+
+void			prepare_points(t_fdf_params *fdf, t_point *point);
+t_point			new_point(float x, float y, int z, int color);
+
+void			print_fdf(t_fdf_params *fdf);
+void			print_instructions(t_fdf_params *fdf);
+void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
+
+int				key_hook(int key, t_fdf_params *fdf);
+
+void			exit_program(t_fdf_params *fdf, int code);
 
 #endif
