@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 09:57:52 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:21:56 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	init(t_fdf_params *fdf)
 	fdf->map.z_min = 0;
 	fdf->map.x = 0;
 	fdf->instructions = 0;
-	fdf->color_mode = 1;
+	fdf->color_mode = 0;
 	fdf->color_one = create_trgb(255, 0, 255, 255);
 	fdf->color_two = create_trgb(255, 255, 255, 0);
 	ft_printf("\n\nPRESS H TO SHOW INSTRUCTIONS AND STATUS\n\n");
