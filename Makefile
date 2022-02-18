@@ -40,6 +40,7 @@ clean:
 	@$(RM) $(OBJ_DIR)
 
 fclean:	clean
+	@make -C ./libft fclean
 	@$(RM) $(NAME)
 
 re:	fclean all

@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 17:21:56 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:19:18 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init(t_fdf_params *fdf)
 		error(3, 0, "Error while allocating memory for angles.");
 	fdf->angles->alpha = 1.05;
 	fdf->angles->beta = 0.65;
-	fdf->angles->gama = 0.8;
+	fdf->angles->gama = 0;
 	fdf->zoom = 50;
 	fdf->translation_x = 300;
 	fdf->translation_y = 100;

@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 22:19:47 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 10:15:38 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:47:19 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	rotate(t_fdf_params *fdf, int key)
 static void	change_color_mode(t_fdf_params *fdf)
 {
 	fdf->color_mode++;
-	if (fdf->color_mode > 2)
+	if (fdf->color_mode > 1)
 		fdf->color_mode = 0;
 }
 
@@ -48,13 +48,13 @@ int	key_hook(int key, t_fdf_params *fdf)
 {
 	if (key == KEY_ESC)
 		exit_program(fdf, 0);
-	else if (key == KEY_ARROW_LEFT || key == KEY_D)
+	else if (key == KEY_ARROW_LEFT || key == KEY_A)
 		fdf->translation_x += 40;
-	else if (key == KEY_ARROW_UP || key == KEY_S)
+	else if (key == KEY_ARROW_UP || key == KEY_W)
 		fdf->translation_y += 40;
-	else if (key == KEY_ARROW_RIGHT || key == KEY_A)
+	else if (key == KEY_ARROW_RIGHT || key == KEY_D)
 		fdf->translation_x -= 40;
-	else if (key == KEY_ARROW_DOWN || key == KEY_W)
+	else if (key == KEY_ARROW_DOWN || key == KEY_S)
 		fdf->translation_y -= 40;
 	else if (key == KEY_Q || key == KEY_E)
 		rotate(fdf, key);

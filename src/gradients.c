@@ -6,40 +6,11 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 17:37:47 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 10:00:30 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:16:05 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-static int	rainbow(void)
-{
-	static int	case_number;
-	static int	ascending;
-	static int	descending;
-
-	ascending += 11;
-	if (ascending > 255)
-	{
-		case_number++;
-		ascending = 0;
-	}
-	if (case_number > 5)
-		case_number = 0;
-	descending = 255 - ascending;
-	if (case_number == 0)
-		return (create_trgb(255, 255, ascending, 0));
-	else if (case_number == 1)
-		return (create_trgb(255, descending, 255, 0));
-	else if (case_number == 2)
-		return (create_trgb(255, 0, 255, ascending));
-	else if (case_number == 3)
-		return (create_trgb(255, 0, descending, 255));
-	else if (case_number == 4)
-		return (create_trgb(255, ascending, 0, 255));
-	else
-		return (create_trgb(255, ascending, 0, 255));
-}
 
 static int	gradient(t_fdf_params *fdf, int z)
 {
@@ -66,8 +37,6 @@ int	get_color(t_fdf_params *fdf, int z)
 			return (fdf->color_two);
 		return (fdf->color_one);
 	}
-	else if (fdf->color_mode == GRADIENT)
-		return (gradient(fdf, z));
 	else
-		return (rainbow());
+		return (gradient(fdf, z));
 }

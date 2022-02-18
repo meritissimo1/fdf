@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 17:51:31 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 10:00:03 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:14:31 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void	print_parameters(t_fdf_params *fdf)
 		color_mode = "SOLID";
 	else if (fdf->color_mode == 1)
 		color_mode = "GRADIENT";
-	else
-		color_mode = "RAINBOW";
 	height = WIN_SIZE_Y - 30;
 	mlx_string_put(fdf->mlx, fdf->win, 20, height, 0xFFFF00,
 		"Zoom: ");

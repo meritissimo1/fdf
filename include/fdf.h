@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:21:31 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/14 22:06:42 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:52:49 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef enum e_status {
 typedef enum e_color_mode {
 	SOLID = 0,
 	GRADIENT = 1,
-	RAINBOW = 2,
 }			t_color_mode;
 
 typedef struct s_angles {
