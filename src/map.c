@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 07:36:42 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/17 23:38:58 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/20 08:28:42 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	get_map_size(t_fdf_params *fdf, int fd)
 	line = get_next_line(fd);
 	split = ft_split(line, ' ');
 	if (split[0] == NULL)
-		error(2, 0, "Error while reading file.");
+		exit(3);
 	while (split[y])
 		y++;
 	fdf->map.y_max = y - 1;
@@ -44,12 +44,12 @@ static void	map_malloc(t_fdf_params *fdf, int fd)
 	get_map_size(fdf, fd);
 	fdf->map.points = (int **)malloc(sizeof(int *) * (fdf->map.x_max + 1));
 	if (!fdf->map.points)
-		error(1, 0, "Error while allocating memory.");
+		exit(3);
 	while (i <= fdf->map.x_max)
 	{
 		fdf->map.points[i] = (int *)malloc(sizeof(int) * (fdf->map.y_max + 1));
 		if (!fdf->map.points[i])
-			error(1, 0, "Error while allocating memory.");
+			exit(3);
 		i++;
 	}
 }

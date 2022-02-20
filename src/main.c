@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:49:50 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/18 01:19:18 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/20 08:14:12 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void	init(t_fdf_params *fdf)
 	fdf->mlx = mlx_init();
 	new_window(fdf, "fdf - marcrodr");
 	fdf->angles = malloc(sizeof(t_angles));
-	if (!fdf->angles)
-		error(3, 0, "Error while allocating memory for angles.");
 	fdf->angles->alpha = 1.05;
 	fdf->angles->beta = 0.65;
 	fdf->angles->gama = 0;
@@ -56,8 +54,6 @@ int	main(int argc, char **argv)
 	t_fdf_params	*fdf;
 
 	fdf = malloc(sizeof(t_fdf_params));
-	if (!fdf)
-		error(3, 0, "Error while creating fdf");
 	check_initial_errors(fdf, argc, argv);
 	init(fdf);
 	print_fdf(fdf);

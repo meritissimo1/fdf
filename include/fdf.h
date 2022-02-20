@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:21:31 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/18 01:52:49 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/20 08:07:53 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
-# include <error.h>
 
 # include "keys.h"
 # include "../libft/libft.h"
