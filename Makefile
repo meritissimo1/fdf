@@ -26,7 +26,7 @@ all:	$(NAME)
 $(NAME):	$(LIBFT) $(OBJ)
 	@echo "Compiling fdf..."
 	@$(CC) $(CFLAGS) $(MAIN) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME)
-	@echo "\033[1;32mDone."
+	@echo "\033[1;32mDone.\033[0m"
 
 $(OBJ_DIR)/%.o:	%.c
 	@mkdir -p $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: marcrodr < marcrodr@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 16:21:31 by marcrodr          #+#    #+#             */
-/*   Updated: 2022/02/20 08:07:53 by marcrodr         ###   ########.fr       */
+/*   Updated: 2022/02/20 08:55:26 by marcrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define WIN_SIZE_X 1280
 # define WIN_SIZE_Y 1024
-# define PI 3.14159265359
 
 typedef enum e_status {
 	LOADING,
